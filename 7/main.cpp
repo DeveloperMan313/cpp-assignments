@@ -1,22 +1,18 @@
 #include "caesar.h"
-#include <fstream>
-#include <iostream>
-
-using namespace std;
+#include "table.h"
 
 int main() {
   system("chcp 65001 > nul");
-  fstream file;
-  file.open("test.txt");
-  if (!file) {
-    cerr << "Ошибка при открытии файла!\n";
-    exit(1);
+  caesar::translateCaesar("source.txt", "key.txt", "encoded.txt",
+                          caesar::mode::encode);
+  caesar::translateCaesar("encoded.txt", "key.txt", "decoded.txt",
+                          caesar::mode::decode);
+  unsigned int values[26][26];
+  for (size_t i = 0; i < 26; ++i) {
+    for (size_t j = 0; j < 26; ++j) {
+      values[i][j] = rand() % 100;
+    }
   }
-  while (file.peek() != EOF) {
-    const int line_sz = 512;
-    char line[line_sz];
-    file.getline(line, line_sz);
-    cout << line << endl;
-  }
+  printTable(values, 4);
   return 0;
 }
