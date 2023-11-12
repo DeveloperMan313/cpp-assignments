@@ -34,23 +34,12 @@ void caesar::translateCaesar(const char *fsource, const char *fkey,
   const char *offsets = caesar::calculateCaesarOffsets(fkey, offsetsSz);
   char symbol;
   while (source.get(symbol)) {
-    if (std::isalpha(symbol)) {
-      const int alphabetSz = 26;
-      const int sign = (mode == caesar::mode::encode) ? 1 : -1;
-      const char anchor = (symbol < 'a') ? 'A' : 'a';
-      int translatedSymbol = static_cast<int>(symbol - anchor) +
-                             sign * static_cast<int>(offsets[offsetsIdx]);
-      if (translatedSymbol >= alphabetSz) {
-        translatedSymbol %= alphabetSz;
-      } else {
-        while (translatedSymbol < 0) {
-          translatedSymbol += alphabetSz;
-        }
-      }
-      translated.put(static_cast<char>(anchor + translatedSymbol));
-    } else {
-      translated.put(symbol);
-    }
+    const int sign = (mode == caesar::mode::encode) ? 1 : -1;
+    const char translatedSymbol =
+        static_cast<char>((static_cast<int>(symbol) +
+                           sign * static_cast<int>(offsets[offsetsIdx])) %
+                          256);
+    translated.put(translatedSymbol);
     offsetsIdx = (offsetsIdx + 1) % offsetsSz;
   }
   source.close();
