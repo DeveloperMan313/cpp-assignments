@@ -10,8 +10,9 @@ wchar_t *caesar::calculateCaesarOffsets(const char *fkey, size_t &offsetsSz) {
   offsetsSz = 0;
   while (key >> word) {
     offsetsInitial[offsetsSz] = 0;
-    for (wchar_t symbol = *word; symbol != '\0'; ++symbol) {
-      offsetsInitial[offsetsSz] += symbol;
+    const size_t wordLen = std::wcslen(word);
+    for (size_t i = 0; i < wordLen; ++i) {
+      offsetsInitial[offsetsSz] += word[i];
     }
     offsetsInitial[offsetsSz] %= 128;
     ++offsetsSz;
