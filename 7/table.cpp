@@ -16,7 +16,7 @@ void printRow(char row[][STR_SIZE], size_t len, int w) {
   std::cout << std::endl;
 }
 
-void printTable(unsigned int values[26][26], int w) {
+void printTable(unsigned int **values, int w) {
   const int alphabetSz = 26;
   std::cout << "Таблица количества преобразований символов (строка -> столбец)"
             << std::endl;

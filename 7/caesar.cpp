@@ -1,24 +1,24 @@
 #include "caesar.h"
 
-char *caesar::calculateCaesarOffsets(const char *fkey, size_t &offsetsSz) {
+wchar_t *caesar::calculateCaesarOffsets(const char *fkey, size_t &offsetsSz) {
   std::wifstream key(fkey);
   key.seekg(0, std::ios::end);
   const size_t textSz = key.tellg();
   wchar_t *word = new wchar_t[textSz + 1];
-  char *offsetsInitial = new char[(textSz + 1) / 2];
+  wchar_t *offsetsInitial = new wchar_t[(textSz + 1) / 2];
   key.seekg(0, std::ios::beg);
   offsetsSz = 0;
   while (key >> word) {
     offsetsInitial[offsetsSz] = 0;
-    for (char symbol = *word; symbol != '\0'; ++symbol) {
-      offsetsInitial[offsetsSz] += static_cast<char>(wcslen(word));
+    for (wchar_t symbol = *word; symbol != '\0'; ++symbol) {
+      offsetsInitial[offsetsSz] += symbol;
     }
     offsetsInitial[offsetsSz] %= 128;
     ++offsetsSz;
   }
   key.close();
   delete[] word;
-  char *offsets = new char[offsetsSz];
+  wchar_t *offsets = new wchar_t[offsetsSz];
   for (size_t i = 0; i < offsetsSz; ++i) {
     offsets[i] = offsetsInitial[i];
   }
@@ -31,44 +31,37 @@ void caesar::translateCaesar(const char *fsource, const char *fkey,
                              unsigned int **stats, size_t statsSz) {
   std::wifstream source(fsource);
   std::wofstream translated(ftranslated);
-  source.imbue(std::locale(std::locale(), new std::codecvt_utf8<wchar_t>));
-  translated.imbue(std::locale(std::locale(), new std::codecvt_utf8<wchar_t>));
-  size_t offsetsSz, offsetsIdx = 0;
-  const char *offsets = caesar::calculateCaesarOffsets(fkey, offsetsSz);
+  const std::locale locale(std::locale(), new std::codecvt_utf8_utf16<wchar_t>);
+  source.imbue(locale);
+  translated.imbue(locale);
+  size_t offsetsSz, offsetsIdx = -1;
+  const wchar_t *offsets = caesar::calculateCaesarOffsets(fkey, offsetsSz);
   wchar_t symbol;
   while (source.get(symbol)) {
-    if (std::iswalpha(symbol)) {
-      const int sign = (mode == caesar::mode::encode) ? 1 : -1;
-      const int alphabetSz = (symbol <= L'z') ? 26 : 33;
-      const wchar_t anchor = (symbol <= L'z') ? ((symbol < L'a') ? L'A' : L'a')
-                                              : ((symbol < L'а') ? L'А' : L'а');
-      int translatedSymbol = static_cast<int>(symbol - anchor) +
-                             sign * static_cast<int>(offsets[offsetsIdx]);
-      if (translatedSymbol >= alphabetSz) {
-        translatedSymbol %= alphabetSz;
-      } else {
-        while (translatedSymbol < 0) {
-          translatedSymbol += alphabetSz;
-        }
-      }
-      translatedSymbol =
-          static_cast<wchar_t>(anchor + static_cast<wchar_t>(translatedSymbol));
-      translated.put(translatedSymbol);
-      if (symbol <= L'z' && translatedSymbol <= L'z') {
-        if (symbol > L'Z') {
-          symbol -= alphabetSz + 6;
-        }
-        if (translatedSymbol > L'Z') {
-          translatedSymbol -= alphabetSz + 6;
-        }
-        std::cout << symbol - anchor << ' ' << translatedSymbol - anchor
-                  << std::endl;
-        ++stats[symbol - anchor][translatedSymbol - anchor];
-      }
-    } else {
+    offsetsIdx = ++offsetsIdx % offsetsSz;
+    if (!std::iswalpha(symbol)) {
       translated.put(symbol);
+      continue;
     }
-    offsetsIdx = (offsetsIdx + 1) % offsetsSz;
+    const int sign = (mode == caesar::mode::encode) ? 1 : -1;
+    const int alphabetSz = (symbol <= L'z') ? 26 : 33;
+    const wchar_t anchor = (symbol <= L'z') ? ((symbol < L'a') ? L'A' : L'a')
+                                            : ((symbol < L'а') ? L'А' : L'а');
+    int translatedSymbolInt = static_cast<int>(symbol - anchor) +
+                              sign * static_cast<int>(offsets[offsetsIdx]);
+    if (translatedSymbolInt >= alphabetSz) {
+      translatedSymbolInt %= alphabetSz;
+    } else {
+      while (translatedSymbolInt < 0) {
+        translatedSymbolInt += alphabetSz;
+      }
+    }
+    const wchar_t translatedSymbol =
+        anchor + static_cast<wchar_t>(translatedSymbolInt);
+    translated.put(translatedSymbol);
+    if (symbol <= L'z' && translatedSymbol <= L'z') {
+      ++stats[symbol - anchor][translatedSymbol - anchor];
+    }
   }
   source.close();
   translated.close();
