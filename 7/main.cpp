@@ -1,4 +1,5 @@
 #include "caesar.h"
+#include "table.h"
 
 int main() {
   const size_t alphabetSz = 26;
@@ -8,10 +9,10 @@ int main() {
     stats[i] = new unsigned int[alphabetSz]{};
   }
   size_t offsetsSz;
-  const wchar_t *offsets = caesar::calculateCaesarOffsets("key.txt", offsetsSz);
+  const char *offsets = caesar::calculateCaesarOffsets("key.txt", offsetsSz);
   caesar::translateCaesar("source.txt", offsets, offsetsSz, "encoded.txt",
                           caesar::mode::encode, stats, alphabetSz);
-  // printTable(stats, 4);
+  printTable(stats, 4);
   caesar::translateCaesar("encoded.txt", offsets, offsetsSz, "decoded.txt",
                           caesar::mode::decode, stats, alphabetSz);
   for (size_t i = 0; i < alphabetSz; ++i) {
