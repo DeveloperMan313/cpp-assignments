@@ -27,16 +27,16 @@ wchar_t *caesar::calculateCaesarOffsets(const char *fkey, size_t &offsetsSz) {
   return offsets;
 }
 
-void caesar::translateCaesar(const char *fsource, const char *fkey,
-                             const char *ftranslated, caesar::mode mode,
-                             unsigned int **stats, size_t statsSz) {
+void caesar::translateCaesar(const char *fsource, const wchar_t *offsets,
+                             const size_t offsetsSz, const char *ftranslated,
+                             caesar::mode mode, unsigned int **stats,
+                             size_t statsSz) {
   std::wifstream source(fsource);
   std::wofstream translated(ftranslated);
   const std::locale locale(std::locale(), new std::codecvt_utf8_utf16<wchar_t>);
   source.imbue(locale);
   translated.imbue(locale);
-  size_t offsetsSz, offsetsIdx = -1;
-  const wchar_t *offsets = caesar::calculateCaesarOffsets(fkey, offsetsSz);
+  size_t offsetsIdx = 0;
   wchar_t symbol;
   while (source.get(symbol)) {
     const int sign = (mode == caesar::mode::encode) ? 1 : -1;
