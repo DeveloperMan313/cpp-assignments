@@ -6,6 +6,8 @@
 
 namespace caesar {
 
+const int MOD = UCHAR_MAX + 1;
+
 enum class mode { encode, decode };
 
 char *calculateCaesarOffsets(const char *fkey, size_t &offsetsSz);
