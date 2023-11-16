@@ -29,13 +29,13 @@ void table::printTable(unsigned int **values) {
   unsigned int maxVal = 0;
   for (size_t i = 0; i < CHAR_CNT; ++i) {
     for (size_t j = 0; j < CHAR_CNT; ++j) {
-      if (values[i][j] > maxVal) {
-        maxVal = values[i][j];
-      }
       if (values[i][j] && hasGlyph_win1251(CHAR_MIN + i) &&
           hasGlyph_win1251(CHAR_MIN + j)) {
         rowHasValues[i] = true;
         columnHasValues[j] = true;
+        if (values[i][j] > maxVal) {
+          maxVal = values[i][j];
+        }
       }
     }
   }
@@ -54,7 +54,7 @@ void table::printTable(unsigned int **values) {
     }
   }
   char headerRow[CHAR_CNT + 1][STR_SIZE]{" "};
-  int headerRowIdx = 0;
+  size_t headerRowIdx = 0;
   for (size_t i = 0; i < CHAR_CNT; ++i) {
     if (columnHasValues[i]) {
       headerRow[headerRowIdx + 1][0] = CHAR_MIN + static_cast<char>(i);
@@ -63,7 +63,7 @@ void table::printTable(unsigned int **values) {
   }
   ++headerRowIdx;
   char headerColumn[CHAR_CNT][STR_SIZE]{};
-  int headerColumnIdx = 0;
+  size_t headerColumnIdx = 0;
   for (size_t i = 0; i < CHAR_CNT; ++i) {
     if (rowHasValues[i]) {
       headerColumn[headerColumnIdx][0] = CHAR_MIN + static_cast<char>(i);
@@ -80,7 +80,8 @@ void table::printTable(unsigned int **values) {
     }
     int rowIdx = 0;
     char row[CHAR_CNT + 1][STR_SIZE];
-    strcpy_s(row[0], headerColumn[headerColumnIdx++]);
+    strcpy_s(row[0], headerColumn[headerColumnIdx]);
+    ++headerColumnIdx;
     for (size_t j = 0; j < CHAR_CNT; ++j) {
       if (!columnHasValues[j]) {
         continue;

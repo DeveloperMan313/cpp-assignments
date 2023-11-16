@@ -13,7 +13,6 @@ char *caesar::calculateCaesarOffsets(const char *fkey, size_t &offsetsSz) {
     for (size_t i = 0; i < wordLen; ++i) {
       offsetsInitial[offsetsSz] += word[i];
     }
-    offsetsInitial[offsetsSz] %= caesar::MOD;
     ++offsetsSz;
   }
   key.close();
@@ -32,14 +31,11 @@ void caesar::translateCaesar(const char *fsource, const char *offsets,
                              size_t statsSz) {
   std::ifstream source(fsource, std::ios::binary | std::ios::in);
   std::ofstream translated(ftranslated, std::ios::binary | std::ios::out);
+  const char sign = (mode == caesar::mode::encode) ? 1 : -1;
   size_t offsetsIdx = 0;
   char symbol;
   while (source.get(symbol)) {
-    const int sign = (mode == caesar::mode::encode) ? 1 : -1;
-    const char translatedSymbol =
-        static_cast<char>((static_cast<int>(symbol) +
-                           sign * static_cast<int>(offsets[offsetsIdx])) %
-                          caesar::MOD);
+    const char translatedSymbol = symbol + sign * offsets[offsetsIdx];
     translated.put(translatedSymbol);
     offsetsIdx = ++offsetsIdx % offsetsSz;
     ++stats[static_cast<int>(translatedSymbol) - CHAR_MIN]
