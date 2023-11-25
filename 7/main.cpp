@@ -10,10 +10,10 @@ int main() {
   size_t offsetsSz;
   const char *offsets = caesar::calculateCaesarOffsets("key.txt", offsetsSz);
   caesar::translateCaesar("source.txt", offsets, offsetsSz, "encoded.txt",
-                          caesar::mode::encode, stats, table::CHAR_CNT);
+                          caesar::mode::encode, stats);
   table::printTable(stats);
   caesar::translateCaesar("encoded.txt", offsets, offsetsSz, "decoded.txt",
-                          caesar::mode::decode, stats, table::CHAR_CNT);
+                          caesar::mode::decode, stats);
   for (size_t i = 0; i < table::CHAR_CNT; ++i) {
     delete[] stats[i];
   }
