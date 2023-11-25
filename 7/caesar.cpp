@@ -27,8 +27,7 @@ char *caesar::calculateCaesarOffsets(const char *fkey, size_t &offsetsSz) {
 
 void caesar::translateCaesar(const char *fsource, const char *offsets,
                              const size_t offsetsSz, const char *ftranslated,
-                             caesar::mode mode, unsigned int **stats,
-                             size_t statsSz) {
+                             caesar::mode mode, unsigned int **stats) {
   std::ifstream source(fsource, std::ios::binary | std::ios::in);
   std::ofstream translated(ftranslated, std::ios::binary | std::ios::out);
   const char sign = (mode == caesar::mode::encode) ? 1 : -1;
