@@ -16,36 +16,25 @@ void deleteMatrix(double **matrix, int m) {
 }
 
 void fillMatrixA(double **matrix, int m, int n) {
-  int *minusXPows = new int[m + 1];
-  minusXPows[0] = 1;
-  for (int i = 0; i < m; ++i) {
-    minusXPows[i + 1] = minusXPows[i] * -x;
+  matrix[0][0] = 1.0;
+  matrix[1][0] = x * x;
+  matrix[0][1] = x / 2;
+  for (int j = 2; j < m; ++j) {
+    matrix[j][0] = matrix[j - 1][0] * -x;
   }
-  int *fac = new int[n];
-  fac[0] = 1;
-  for (int j = 1; j < n; ++j) {
-    fac[j] = fac[j - 1] * (j + 1);
+  for (int j = 2; j < n; ++j) {
+    matrix[0][j] = matrix[0][j - 1] / (j + 1);
   }
   int minSz = (m < n) ? m : n;
-  for (int i = 0; i < minSz; ++i) {
-    matrix[i][i] = 1;
+  for (int i = 1; i < minSz; ++i) {
+    matrix[i][i] = 1.0;
     for (int j = i + 1; j < m; ++j) {
-      if (i == 0) {
-        matrix[j][i] = minusXPows[j + 1];
-      } else {
-        matrix[j][i] = matrix[j][i - 1] / std::pow(i + 1, j + 1);
-      }
+      matrix[j][i] = matrix[j][i - 1] / std::pow(i + 1, j + 1);
     }
     for (int j = i + 1; j < n; ++j) {
-      if (i == 0) {
-        matrix[i][j] = x / fac[j];
-      } else {
-        matrix[i][j] = matrix[i - 1][j] * matrix[0][j];
-      }
+      matrix[i][j] = matrix[i - 1][j] * matrix[0][j];
     }
   }
-  delete[] minusXPows;
-  delete[] fac;
 }
 
 void fillMatrixB(double (&matrix)[B_sz][B_sz]) {
