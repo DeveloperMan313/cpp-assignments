@@ -17,8 +17,12 @@ void deleteMatrix(double **matrix, int m) {
 
 void fillMatrixA(double **matrix, int m, int n) {
   matrix[0][0] = 1.0;
-  matrix[1][0] = x * x;
-  matrix[0][1] = x / 2;
+  if (m > 1) {
+    matrix[1][0] = x * x;
+  }
+  if (n > 1) {
+    matrix[0][1] = x / 2;
+  }
   for (int j = 2; j < m; ++j) {
     matrix[j][0] = matrix[j - 1][0] * -x;
   }
