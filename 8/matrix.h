@@ -13,4 +13,4 @@ void fillMatrixA(double **matrix, int m, int n);
 
 void fillMatrixB(double (&matrix)[B_sz][B_sz]);
 
-double **createPointerB(double matrix[B_sz][B_sz]);
+double **createPointerB(double (&matrix)[B_sz][B_sz]);

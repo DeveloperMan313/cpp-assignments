@@ -49,8 +49,8 @@ void fillMatrixB(double (&matrix)[B_sz][B_sz]) {
   }
 }
 
-double **createPointerB(double matrix[B_sz][B_sz]) {
-  double **B_ptr = createMatrix(B_sz, B_sz);
+double **createPointerB(double (&matrix)[B_sz][B_sz]) {
+  double **B_ptr = new double *[B_sz];
   for (int i = 0; i < B_sz; ++i) {
     B_ptr[i] = matrix[i];
   }

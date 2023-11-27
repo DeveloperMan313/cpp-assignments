@@ -7,4 +7,7 @@
 
 const int MAX_LINE_WIDTH = 80;
 
-void printMatrix(double **matrix, int m, int n, int precision, int margin);
+enum class mode { scientific, fixed };
+
+void printMatrix(double **matrix, int m, int n, mode mode, int precision,
+                 int margin);
