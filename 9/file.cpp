@@ -9,7 +9,7 @@ char *get_fname(std::istream &istream) {
   return fname_c;
 }
 
-void read_file(vector<Dictionary *> &dict, char *fname) {
+void read_file(vector<Word *> &dict, char *fname) {
   clear_dict(dict);
   std::ifstream file(fname, std::ios::in | std::ios::binary);
   if (!file) {
@@ -23,7 +23,7 @@ void read_file(vector<Dictionary *> &dict, char *fname) {
     if (eng[0] == '\0' || rus[0] == '\0') {
       break;
     }
-    dict.push(new Dictionary{eng.array, rus.array});
+    dict.push(new Word{eng.array, rus.array});
     eng.array = nullptr;
     rus.array = nullptr;
   }
@@ -31,7 +31,7 @@ void read_file(vector<Dictionary *> &dict, char *fname) {
   sort_dict(dict);
 }
 
-void write_file(const vector<Dictionary *> &dict, char *fname) {
+void write_file(const vector<Word *> &dict, char *fname) {
   std::ofstream file(fname, std::ios::out | std::ios::binary);
   if (!file) {
     std::cout << "Не удалось открыть файл" << std::endl;

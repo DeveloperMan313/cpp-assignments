@@ -21,7 +21,7 @@ int menu(std::istream &istream) {
 }
 
 void interactive(std::istream &istream, bool demo) {
-  vector<Dictionary *> dict;
+  vector<Word *> dict;
   while (true) {
     char *fname;
     vector<char> eng, rus;
@@ -115,9 +115,8 @@ void demo() {
   interactive(stream, true);
 };
 
-void add_word(vector<Dictionary *> &dict, vector<char> &eng,
-              vector<char> &rus) {
-  Dictionary *newEntry = new Dictionary{eng.array, rus.array};
+void add_word(vector<Word *> &dict, vector<char> &eng, vector<char> &rus) {
+  Word *newEntry = new Word{eng.array, rus.array};
   dict.push(newEntry);
   if (dict.size > 1 && strcmp(eng.array, dict[dict.size - 2]->eng) == -1) {
     size_t wordIdx = dict.size - 1;
@@ -136,7 +135,7 @@ void add_word(vector<Dictionary *> &dict, vector<char> &eng,
   rus.array = nullptr;
 }
 
-void delete_word(vector<Dictionary *> &dict, const vector<char> &eng) {
+void delete_word(vector<Word *> &dict, const vector<char> &eng) {
   size_t wordIdx = find_eng(dict, eng);
   if (wordIdx == -1) {
     std::cout << "Слово не найдено" << std::endl;
@@ -149,7 +148,7 @@ void delete_word(vector<Dictionary *> &dict, const vector<char> &eng) {
   --dict.size;
 }
 
-void translate_eng(const vector<Dictionary *> &dict, const vector<char> &eng) {
+void translate_eng(const vector<Word *> &dict, const vector<char> &eng) {
   size_t wordIdx = find_eng(dict, eng);
   if (wordIdx == -1) {
     std::cout << "Слово не найдено" << std::endl;
@@ -158,7 +157,7 @@ void translate_eng(const vector<Dictionary *> &dict, const vector<char> &eng) {
   std::cout << "Перевод: " << dict[wordIdx]->rus << std::endl;
 }
 
-void translate_rus(const vector<Dictionary *> &dict, const vector<char> &rus) {
+void translate_rus(const vector<Word *> &dict, const vector<char> &rus) {
   for (size_t i = 0; i < dict.size; ++i) {
     if (strcmp(dict[i]->rus, rus.array) == 0) {
       std::cout << "Перевод: " << dict[i]->eng << std::endl;
@@ -168,14 +167,14 @@ void translate_rus(const vector<Dictionary *> &dict, const vector<char> &rus) {
   std::cout << "Слово не найдено" << std::endl;
 }
 
-void print_dict(const vector<Dictionary *> &dict) {
+void print_dict(const vector<Word *> &dict) {
   std::cout << "Словарь:" << std::endl;
   for (size_t i = 0; i < dict.size; ++i) {
     std::cout << dict[i]->eng << " - " << dict[i]->rus << std::endl;
   }
 }
 
-bool dict_empty(const vector<Dictionary *> &dict) {
+bool dict_empty(const vector<Word *> &dict) {
   if (dict.size == 0) {
     std::cout << "Словарь пуст" << std::endl;
     return true;
@@ -183,7 +182,7 @@ bool dict_empty(const vector<Dictionary *> &dict) {
   return false;
 }
 
-void sort_dict(vector<Dictionary *> &dict) {
+void sort_dict(vector<Word *> &dict) {
   for (int i = 0; i < dict.size; ++i) {
     int swapIdx = i;
     for (int j = i + 1; j < dict.size; ++j) {
@@ -192,31 +191,31 @@ void sort_dict(vector<Dictionary *> &dict) {
       }
     }
     if (i != swapIdx) {
-      Dictionary *dPtr = dict[i];
+      Word *dPtr = dict[i];
       dict[i] = dict[swapIdx];
       dict[swapIdx] = dPtr;
     }
   }
 }
 
-inline void delete_dict_entry(vector<Dictionary *> &dict, size_t i) {
+inline void delete_dict_entry(vector<Word *> &dict, size_t i) {
   delete[] dict[i]->eng;
   delete[] dict[i]->rus;
   delete dict[i];
 }
 
-void clear_dict(vector<Dictionary *> &dict) {
+void clear_dict(vector<Word *> &dict) {
   for (size_t i = 0; i < dict.size; ++i) {
     delete_dict_entry(dict, i);
   }
   dict.clear();
 }
 
-size_t find_eng(const vector<Dictionary *> &dict, const vector<char> &word) {
+size_t find_eng(const vector<Word *> &dict, const vector<char> &eng) {
   size_t l = 0, r = dict.size - 1;
   while (l <= r) {
     size_t m = l + (r - l) / 2;
-    int cmp = strcmp(dict[m]->eng, word.array);
+    int cmp = strcmp(dict[m]->eng, eng.array);
     if (cmp == 0) {
       return m;
     }

@@ -43,5 +43,5 @@ template <typename T> T &vector<T>::operator[](size_t i) const {
   return this->array[i];
 }
 
-template struct vector<Dictionary *>;
+template struct vector<Word *>;
 template struct vector<char>;
