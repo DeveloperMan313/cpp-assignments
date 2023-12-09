@@ -17,5 +17,7 @@ template <typename T> struct vector {
 
   void push(const T &element);
 
+  void clear();
+
   T &operator[](size_t i) const;
 };

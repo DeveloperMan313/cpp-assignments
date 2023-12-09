@@ -29,6 +29,16 @@ template <typename T> void vector<T>::push(const T &element) {
   ++size;
 }
 
+template <typename T> void vector<T>::clear() {
+  if (this->size == 0) {
+    return;
+  }
+  delete[] this->array;
+  this->array = new T[1];
+  this->capacity = 1;
+  this->size = 0;
+}
+
 template <typename T> T &vector<T>::operator[](size_t i) const {
   return this->array[i];
 }
