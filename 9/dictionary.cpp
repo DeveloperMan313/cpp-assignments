@@ -14,8 +14,8 @@ int menu(std::istream &istream) {
             << std::endl;
   int option = 0;
   if (!(istream >> option)) {
-    std::cin.clear();
-    std::cin.ignore();
+    istream.clear();
+    istream.ignore();
   }
   return option;
 }
