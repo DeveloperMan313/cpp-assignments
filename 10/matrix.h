@@ -21,6 +21,8 @@ void multiplyMatrices(matrix &a, matrix &b, matrix &c);
 
 void inputMatrix(matrix &mat);
 
+double EPrecision(matrix &mat);
+
 void UIInverse();
 
 void UISLE();

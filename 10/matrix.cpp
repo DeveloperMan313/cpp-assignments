@@ -82,6 +82,18 @@ void inputMatrix(matrix &mat) {
   }
 }
 
+double EPrecision(matrix &mat) {
+  double sum = 0;
+  for (size_t i = 0; i < mat.m; ++i) {
+    for (size_t j = 0; j < mat.m; ++j) {
+      if (i != j) {
+        sum += abs(mat.arr[i][j]);
+      }
+    }
+  }
+  return sum / ((mat.m - 1) * mat.m);
+}
+
 void UIInverse() {
   const int margin = 4, precision = 2;
   matrix matI, mat, inv;
@@ -111,6 +123,8 @@ void UIInverse() {
     multiplyMatrices(mat, inv, product);
     std::cout << "A * A^-1 = " << std::endl;
     printMatrix(product.arr, inv.m, inv.m, mode::fixed, precision, margin);
+    std::cout << "Точность обратной матрицы: " << std::scientific
+              << EPrecision(product) << std::endl;
     deleteMatrix(product);
   }
   deleteMatrix(mat);
