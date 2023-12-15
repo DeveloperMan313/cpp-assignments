@@ -65,11 +65,9 @@ void multiplyMatrices(matrix &a, matrix &b, matrix &c) {
   initMatrix(c, a.m, b.n);
   for (size_t i = 0; i < a.m; ++i) {
     for (size_t j = 0; j < b.n; ++j) {
-      double sum = 0;
       for (size_t k = 0; k < a.n; ++k) {
-        sum += a.arr[i][k] * b.arr[k][j];
+        c.arr[i][j] += a.arr[i][k] * b.arr[k][j];
       }
-      c.arr[i][j] = sum;
     }
   }
 }

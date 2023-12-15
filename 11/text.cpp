@@ -38,8 +38,9 @@ void printWords(const vector<char *> &words) {
     }
     if (printed) {
       _putch(' ');
+    } else {
+      printed = true;
     }
-    printed = true;
     size_t len = strlen(words[i]);
     for (size_t j = 0; j < len; ++j) {
       if (j == len - 1 || words[i][j] != words[i][len - 1]) {
