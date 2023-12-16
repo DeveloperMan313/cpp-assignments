@@ -132,10 +132,11 @@ void UIInverse() {
 void UISLE() {
   const int margin = 4, precision = 2;
   matrix mat, inv;
-  size_t m;
-  std::cout << "Введите размер квадратной матрицы" << std::endl;
-  std::cin >> m;
-  initMatrix(mat, m);
+  size_t m, n;
+  std::cout << "Введите размер матрицы коэффициентов системы (m n)"
+            << std::endl;
+  std::cin >> m >> n;
+  initMatrix(mat, m, n);
   std::cout << "Введите матрицу коэффициентов системы" << std::endl;
   inputMatrix(mat);
   if (!getInverse(mat, inv)) {
