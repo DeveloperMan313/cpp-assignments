@@ -79,14 +79,14 @@ void printRow(const char **row, int length, int w) {
 void methodTable(dynArray &dArr, bool reversed, int w) {
   dynArray dArrInitial(dArr.length);
   copyArray(dArr, dArrInitial);
-  const char *header[] = {"Метод", "Результат", "Сравнений", "Перестановок"};
-  const char *order[] = {"возрастанию", "убыванию"};
-  cout << "Количество элементов: " << dArr.length << ". Заданный массив: ";
+  const char *header[] = {"РњРµС‚РѕРґ", "Р РµР·СѓР»СЊС‚Р°С‚", "РЎСЂР°РІРЅРµРЅРёР№", "РџРµСЂРµСЃС‚Р°РЅРѕРІРѕРє"};
+  const char *order[] = {"РІРѕР·СЂР°СЃС‚Р°РЅРёСЋ", "СѓР±С‹РІР°РЅРёСЋ"};
+  cout << "РљРѕР»РёС‡РµСЃС‚РІРѕ СЌР»РµРјРµРЅС‚РѕРІ: " << dArr.length << ". Р—Р°РґР°РЅРЅС‹Р№ РјР°СЃСЃРёРІ: ";
   printArray(dArr);
-  cout << ". Сортировка по " << order[reversed] << endl;
+  cout << ". РЎРѕСЂС‚РёСЂРѕРІРєР° РїРѕ " << order[reversed] << endl;
   printRow(header, 4, w);
-  const char *methods[] = {"сравнений (n)", "сравнений (o)", "пузырек (n)",
-                           "пузырек (o)"};
+  const char *methods[] = {"СЃСЂР°РІРЅРµРЅРёР№ (n)", "СЃСЂР°РІРЅРµРЅРёР№ (o)", "РїСѓР·С‹СЂРµРє (n)",
+                           "РїСѓР·С‹СЂРµРє (o)"};
   for (int i = 0; i < 4; ++i) {
     if (i == 2) {
       copyArray(dArrInitial, dArr);
@@ -104,10 +104,10 @@ void methodTable(dynArray &dArr, bool reversed, int w) {
 }
 
 void sizeTable(int method, bool reversed, int w, int mx) {
-  const char *header[] = {"N", "Сравнений", "Перестановок"};
-  const char *methods[] = {"сравнений (n)", "пузырек (n)"};
-  const char *order[] = {"возрастанию", "убыванию"};
-  cout << "Метод: " << methods[method] << ". Сортировка по " << order[reversed]
+  const char *header[] = {"N", "РЎСЂР°РІРЅРµРЅРёР№", "РџРµСЂРµСЃС‚Р°РЅРѕРІРѕРє"};
+  const char *methods[] = {"СЃСЂР°РІРЅРµРЅРёР№ (n)", "РїСѓР·С‹СЂРµРє (n)"};
+  const char *order[] = {"РІРѕР·СЂР°СЃС‚Р°РЅРёСЋ", "СѓР±С‹РІР°РЅРёСЋ"};
+  cout << "РњРµС‚РѕРґ: " << methods[method] << ". РЎРѕСЂС‚РёСЂРѕРІРєР° РїРѕ " << order[reversed]
        << endl;
   printRow(header, 3, w);
   int length = 5;

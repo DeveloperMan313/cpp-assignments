@@ -4,15 +4,15 @@
 using namespace std;
 
 int main() {
-  system("chcp 1251 > nul");
+  system("chcp 65001 > nul");
   double a, b;
-  cout << "Ââåäèòå çíà÷åíèå a: ";
+  cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð·Ð½Ð°Ñ‡ÐµÐ½Ð¸Ðµ a: ";
   cin >> a;
-  cout << "Ââåäèòå çíà÷åíèå b: ";
+  cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð·Ð½Ð°Ñ‡ÐµÐ½Ð¸Ðµ b: ";
   cin >> b;
   cout << endl;
-  CalculatePrintTables(IntRect, "Ìåòîä ïðÿìîóãîëüíèêîâ", a, b);
-  CalculatePrintTables(IntTrap, "Ìåòîä òðàïåöèé", a, b);
+  CalculatePrintTables(IntRect, "ÐœÐµÑ‚Ð¾Ð´ Ð¿Ñ€ÑÐ¼Ð¾ÑƒÐ³Ð¾Ð»ÑŒÐ½Ð¸ÐºÐ¾Ð²", a, b);
+  CalculatePrintTables(IntTrap, "ÐœÐµÑ‚Ð¾Ð´ Ñ‚Ñ€Ð°Ð¿ÐµÑ†Ð¸Ð¹", a, b);
   system("pause");
   return 0;
 }

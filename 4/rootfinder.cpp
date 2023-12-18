@@ -49,13 +49,13 @@ void printRow(int w, int n, double x, int N) {
 
 void printTable(int w, double eps, double x, double l, double r, int k,
                 int maxIter) {
-  cout << "Óðàâíåíèå: ";
+  cout << "Ð£Ñ€Ð°Ð²Ð½ÐµÐ½Ð¸Ðµ: ";
   if (k == 1)
     cout << "x - cos(x) = 0";
   else
     cout << "x - k * cos(x) = 0, k = " << k;
-  cout << ". Ïîãðåøíîñòü: " << eps << endl << left;
-  cout << setw(w) << "¹ ìåòîäà" << setw(w) << "x"
+  cout << ". ÐŸÐ¾Ð³Ñ€ÐµÑˆÐ½Ð¾ÑÑ‚ÑŒ: " << eps << endl << left;
+  cout << setw(w) << "â„– Ð¼ÐµÑ‚Ð¾Ð´Ð°" << setw(w) << "x"
        << "N" << endl;
   int N;
   double X = iter(x, eps, k, maxIter, N);
@@ -69,8 +69,8 @@ void printTable(int w, double eps, double x, double l, double r, int k,
 
 void runTests(int w, double eps, int maxIter) {
   double x, l, r;
-  cout << "Ââåäèòå ñòàðòîâîå çíà÷åíèå x äëÿ èòåðàöèîííûõ ìåòîäîâ\n"
-          "è ãðàíèöû l r äëÿ ìåòîäà ïîëîâèííîãî äåëåíèÿ"
+  cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ ÑÑ‚Ð°Ñ€Ñ‚Ð¾Ð²Ð¾Ðµ Ð·Ð½Ð°Ñ‡ÐµÐ½Ð¸Ðµ x Ð´Ð»Ñ Ð¸Ñ‚ÐµÑ€Ð°Ñ†Ð¸Ð¾Ð½Ð½Ñ‹Ñ… Ð¼ÐµÑ‚Ð¾Ð´Ð¾Ð²\n"
+          "Ð¸ Ð³Ñ€Ð°Ð½Ð¸Ñ†Ñ‹ l r Ð´Ð»Ñ Ð¼ÐµÑ‚Ð¾Ð´Ð° Ð¿Ð¾Ð»Ð¾Ð²Ð¸Ð½Ð½Ð¾Ð³Ð¾ Ð´ÐµÐ»ÐµÐ½Ð¸Ñ"
        << endl;
   cin >> x >> l >> r;
   printTable(w, eps, x, l, r, 1, maxIter);

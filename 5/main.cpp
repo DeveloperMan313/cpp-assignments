@@ -3,7 +3,7 @@
 using namespace std;
 
 int main() {
-  system("chcp 1251 > nul");
+  system("chcp 65001 > nul");
   int w = 16, mx = 10, l = 5;
   dynArray dArr(l);
   fillRand(dArr, mx);
