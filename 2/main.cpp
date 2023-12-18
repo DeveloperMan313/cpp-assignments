@@ -74,6 +74,5 @@ int main() {
   if (m == 0)
     cout << " ровно";
   cout << endl;
-  system("pause");
   return 0;
 }

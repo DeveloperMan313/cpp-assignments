@@ -1,4 +1,4 @@
-#include "rootfinder.h"
+#include "rootfinder.hpp"
 
 using namespace std;
 
@@ -7,6 +7,5 @@ int main() {
   int w = 16, maxIter = 100000;
   runTests(w, 1e-6, maxIter);
   runTests(w, 1e-8, maxIter);
-  system("pause");
   return 0;
 }

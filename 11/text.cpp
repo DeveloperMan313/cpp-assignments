@@ -1,4 +1,4 @@
-#include "text.h"
+#include "text.hpp"
 
 void enterText(vector<char *> &words) {
   vector<char> text;

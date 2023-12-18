@@ -8,8 +8,8 @@ int task1() {
   int n, m, sum = 0, cnt = 0;
   cout << "Введите количество натуральных чисел n и число m" << endl;
   cin >> n >> m;
-  if (cin.fail() || n < 1 || m < 2 || m == 5 ||
-      m >= n) return 1; // проверка данных на ошибку
+  if (cin.fail() || n < 1 || m < 2 || m == 5 || m >= n)
+    return 1; // проверка данных на ошибку
   // начать с 5 прыжки по 5 это все натуральные числа, кратные 5
   // продолжать цикл, пока cnt не станет равно n
   for (int i = 5; cnt < n; i += 5)
@@ -82,9 +82,12 @@ int task4() {
   if (cin.fail() || n < 1) // проверка данных на ошибку
     return 1;
   // вывод промежуточных результатов
-  if (n > 3) cout << "n = 3: " << setprecision(9) << task4a(3) << endl;
-  if (n > 5) cout << "n = 5: " << setprecision(9) << task4a(5) << endl;
-  if (n > 10) cout << "n = 10: " << setprecision(9) << task4a(10) << endl;
+  if (n > 3)
+    cout << "n = 3: " << setprecision(9) << task4a(3) << endl;
+  if (n > 5)
+    cout << "n = 5: " << setprecision(9) << task4a(5) << endl;
+  if (n > 10)
+    cout << "n = 10: " << setprecision(9) << task4a(10) << endl;
   cout << setprecision(9) << task4a(n) << endl;
   return 0;
 }

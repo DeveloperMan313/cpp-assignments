@@ -1,4 +1,4 @@
-#include "mprinter.h"
+#include "mprinter.hpp"
 
 void printMatrix(double **matrix, int m, int n, mode mode, int precision,
                  int margin) {

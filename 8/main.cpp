@@ -1,5 +1,5 @@
-#include "matrix.h"
-#include "mprinter.h"
+#include "matrix.hpp"
+#include "mprinter.hpp"
 
 int main() {
   int m, n, precisionSci, precisionFix, margin = 4;

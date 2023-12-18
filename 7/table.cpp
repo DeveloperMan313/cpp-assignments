@@ -1,4 +1,4 @@
-#include "table.h"
+#include "table.hpp"
 
 void table::printHorLine(int columns, int w) {
   std::cout << '+' << std::setfill('-');

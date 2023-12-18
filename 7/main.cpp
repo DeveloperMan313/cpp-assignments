@@ -1,5 +1,5 @@
-#include "caesar.h"
-#include "table.h"
+#include "caesar.hpp"
+#include "table.hpp"
 
 int main() {
   std::system("chcp 1251 > nul");

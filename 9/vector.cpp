@@ -1,5 +1,5 @@
-#include "vector.h"
-#include "dictionary.h"
+#include "vector.hpp"
+#include "dictionary.hpp"
 
 template <typename T> vector<T>::vector() {
   this->array = new T[1];

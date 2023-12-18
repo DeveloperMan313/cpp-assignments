@@ -1,4 +1,4 @@
-#include "file.h"
+#include "file.hpp"
 
 char *get_fname(std::istream &istream) {
   std::cout << "Введите имя файла" << std::endl;

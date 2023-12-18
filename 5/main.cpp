@@ -1,4 +1,4 @@
-#include "sort.h"
+#include "sort.hpp"
 
 using namespace std;
 
@@ -15,6 +15,5 @@ int main() {
   mx = 1000;
   sizeTable(0, false, w, mx);
   sizeTable(1, true, w, mx);
-  system("pause");
   return 0;
 }

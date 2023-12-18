@@ -1,4 +1,4 @@
-#include "dictionary.h"
+#include "dictionary.hpp"
 
 int main(int argc, char *argv[]) {
   system("chcp 65001 > nul");

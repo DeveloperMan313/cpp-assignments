@@ -1,4 +1,4 @@
-#include "text.h"
+#include "text.hpp"
 
 int main() {
   vector<char *> words;

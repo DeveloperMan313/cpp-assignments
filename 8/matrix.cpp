@@ -1,4 +1,4 @@
-#include "matrix.h"
+#include "matrix.hpp"
 
 double **createMatrix(int m, int n) {
   double **matrix = new double *[m];

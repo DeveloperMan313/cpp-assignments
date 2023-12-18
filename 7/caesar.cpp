@@ -1,4 +1,4 @@
-#include "caesar.h"
+#include "caesar.hpp"
 
 char *caesar::calculateCaesarOffsets(const char *fkey, size_t &offsetsSz) {
   std::ifstream key(fkey, std::ios::binary | std::ios::in | std::ios::ate);

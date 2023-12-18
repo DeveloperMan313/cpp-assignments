@@ -1,5 +1,5 @@
-#include "calculus.h"
-#include "table.h"
+#include "calculus.hpp"
+#include "table.hpp"
 
 using namespace std;
 
@@ -13,6 +13,5 @@ int main() {
   cout << endl;
   CalculatePrintTables(IntRect, "Метод прямоугольников", a, b);
   CalculatePrintTables(IntTrap, "Метод трапеций", a, b);
-  system("pause");
   return 0;
 }

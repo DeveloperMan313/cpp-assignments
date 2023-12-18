@@ -1,4 +1,4 @@
-#include "vector.h"
+#include "vector.hpp"
 
 template <typename T> vector<T>::vector() {
   this->array = new T[1];

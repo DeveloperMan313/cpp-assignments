@@ -1,6 +1,6 @@
 #pragma once
 
-#include "dictionary.h"
+#include "dictionary.hpp"
 #include <fstream>
 
 char *get_fname(std::istream &istream);

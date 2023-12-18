@@ -1,5 +1,5 @@
-#include "dictionary.h"
-#include "file.h"
+#include "dictionary.hpp"
+#include "file.hpp"
 
 int menu(std::istream &istream) {
   std::cout << "Выберите действие:\n"

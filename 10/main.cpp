@@ -1,4 +1,4 @@
-#include "matrix.h"
+#include "matrix.hpp"
 
 int main() {
   system("chcp 65001 > nul");

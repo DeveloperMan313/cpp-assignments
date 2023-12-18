@@ -1,4 +1,4 @@
-#include "matrix.h"
+#include "matrix.hpp"
 
 void initMatrix(matrix &mat, size_t m, size_t n) {
   if (n == -1) {

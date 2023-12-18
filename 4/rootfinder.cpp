@@ -1,4 +1,4 @@
-#include "rootfinder.h"
+#include "rootfinder.hpp"
 
 using namespace std;
 
